@@ -1,0 +1,3 @@
+[submodule "ckeditor5-build-classic"]
+	path = ckeditor5-build-classic
+	url = https://github.com/teachers-uk-net/ckeditor5-build-classic

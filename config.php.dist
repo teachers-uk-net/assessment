@@ -1,0 +1,14 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: sjm
+ * Date: 29/06/2018
+ * Time: 13:59
+ */
+
+$link = mysqli_connect('host', 'user', 'password', 'database');
+
+$link2 = mysqli_connect('host', 'user', 'password', 'database');
+
+$adminlink = mysqli_connect('host', 'user', 'password', 'database');
+
