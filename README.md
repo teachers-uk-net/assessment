@@ -9,7 +9,7 @@ question saved
 ### TODO
 
 - Add a column (boolean) in tblGroupTests for 'marked'
-- Add "keep alive" to pages to allow more time to respond before a php timeout
+~~- Add "keep alive" to pages to allow more time to respond before a php timeout~~ At UAT
 - Considering adding the ability for users to change background colours (although actual exam papers are white with black text)
 - Create a view so that when 'marked' and 'Available' are true student 
 sees a button to take them to feedback and marks
