@@ -532,7 +532,7 @@ function selectTest(){
     $sql = "SELECT tGT.TestName, tG.GroupID
             FROM tblGroupTests tGT
             JOIN tblGroups tG on tGT.GroupID = tG.GroupID
-            WHERE tGT.TestName='".$_GET['selectTest']."'";
+            WHERE tGT.TestName='".$_GET['selectTest']."' AND tGT.Available=1";
 
     $qrySelectTests = mysqli_query($adminlink, $sql);
 
