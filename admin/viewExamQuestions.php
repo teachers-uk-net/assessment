@@ -78,6 +78,12 @@ if(!isAdmin()){
                             <label for="textResponse">
                                 <?php echo $val['Question']; ?>
                             </label>
+                            <hr>
+                            <div>
+                                <h2>Mark scheme:</h2>
+                                <?php echo $val['CorrectAns']; ?>
+                            </div>
+                            <hr>
                             <blockquote>
                                 <h2>Students response:</h2>
                                 <?php
