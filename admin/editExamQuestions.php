@@ -15,7 +15,7 @@ if(!isAdmin()){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Editing Question</title>
     <link rel="stylesheet" href="../../bootstrap/3.3.7/dist/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -159,8 +159,14 @@ if(!isAdmin()){
         </div>
     </form>
 </div>
-
-
+<div class="wrapper">
+    <p><a href="admin.php?viewTests=1" class="btn btn-link" name="viewTests_btn">Manage Tests and Questions</a></p>
+    <p><a href="admin.php?viewGroups=1" class="btn btn-link" name="viewGroups_btn">View / edit groups</a></p>
+    <p><a href="admin.php?viewStudents=1" class="btn btn-link" name="viewStudents_btn">View / edit students</a></p>
+    <!--<p><a href="admin.php?viewAssign=1" class="btn btn-link" name="viewAssign_btn">View / edit assigned Tests</a></p>-->
+    <!--<p><a href="admin.php?markTests=1" class="btn btn-link" name="viewAssign_btn">View submitted Tests</a></p>-->
+    <p><a href="../welcome.php?logout='1'" class="btn btn-danger">Sign Out</a></p>
+</div>
 
 </body>
 </html>
