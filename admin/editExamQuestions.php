@@ -22,7 +22,7 @@ if(!isAdmin()){
         .wrapper{ padding: 20px; }
     </style>
 </head>
-<body>
+<body onload="setInterval(function(){$.post('/../refresh_session.php');},600000);">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <script src="../ckeditor5-build-classic/ckeditor.js"></script>
