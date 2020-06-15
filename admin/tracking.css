@@ -1,0 +1,16 @@
+#trackingLink {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+
+#tracking {
+    position: fixed;
+    right: 20px;
+    top: 50px;
+    width: 300px;
+    padding: 50px 0;
+    /*text-align: center;*/
+    background-color: bisque;
+    margin-top: 20px;
+}

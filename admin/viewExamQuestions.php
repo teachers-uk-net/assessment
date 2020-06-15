@@ -17,9 +17,11 @@ if(!isAdmin()){
     <meta charset="UTF-8">
     <title>Marking Question</title>
     <link rel="stylesheet" href="../../bootstrap/3.3.7/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="tracking.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
         .wrapper{ padding: 20px; }
+        blockquote{background-color: lightblue; }
     </style>
 </head>
 <body onload="setInterval(function(){$.post('/../refresh_session.php');},600000);">
@@ -33,6 +35,28 @@ if(!isAdmin()){
     //print_r($QuestParts);
     ?>
     <?php //if(!empty($QuestionType)): ?>
+    <div id="trackingLink">
+        <a class="btn btn-link" onclick="showTracking()">Show / hide tracking</a>
+    </div>
+    <div id="tracking">
+        <div class="panel panel-default">
+            <table class="table">
+                <tr>
+                    <td>Uses software under the control of the teacher to create, store and edit digital content using appropriate file and folder names.</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Understands that people interact with computers.</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Shares their use of technology in school.</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+            </table>
+        </div>
+        Tracking details here
+    </div>
     <?php if(!empty($QuestNo)): ?>
 <!--    <h2>Question --><?php //echo $QuestNo; ?><!--</h2>-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -142,7 +166,16 @@ if(!isAdmin()){
     <!--<p><a href="admin.php?markTests=1" class="btn btn-link" name="viewAssign_btn">View submitted Tests</a></p>-->
     <p><a href="../welcome.php?logout='1'" class="btn btn-danger">Sign Out</a></p>
 </div>
-
+<script>
+    function showTracking() {
+        var x = document.getElementById("tracking");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>

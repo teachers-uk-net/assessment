@@ -7,21 +7,31 @@ if(!isAdmin()){
     <div class="row">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <h3>Add a test:</h3>
-            <div class="form-row">
-                <div class="form-group col-md-4">
+            <div class="row">
+                <div class="form-group col-md-5">
                     <input type="text" name="TestName" placeholder="Test Name" class="form-control" value="<?php echo $TestName; ?>">
                 </div>
                 <div class="form-group col-md-5">
                     <input type="text" name="Description" placeholder="Description" class="form-control" value="<?php echo $Description; ?>">
                 </div>
-                <div class="form-check form-check-inline">
+            </div>
+            <div class="row">
+                <div class="form-check form-check-inline col-md-5">
+                    <input class="form-check-input position-static" type="checkbox" id="KS3" name="KS3">
+                    <label class="form-check-label" for="KS3">KS3 Assessment &nbsp;</label>
+                    <input class="form-check-input position-static" type="checkbox" id="KS4" name="KS4">
+                    <label class="form-check-label" for="KS4">KS4 Assessment &nbsp;</label>
+                    <input class="form-check-input position-static" type="checkbox" id="KS5" name="KS5">
+                    <label class="form-check-label" for="KS5">KS5 Assessment &nbsp;</label>
+                </div>
+                <div class="form-check form-check-inline col-md-3">
                     <input class="form-check-input position-static" type="checkbox" id="DoNotShowMarks" name="DoNotShowMarks">
                     <label class="form-check-label" for="DoNotShowMarks">Check box to not show marks on Test</label>
                 </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" name="addTest_btn" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
+                <div class="form-group form-inline">
+                    <input type="submit" class="btn btn-primary" name="addTest_btn" value="Submit">
+                    <input type="reset" class="btn btn-default" value="Reset">
+                </div>
             </div>
         </form>
     </div>
@@ -87,6 +97,9 @@ if(!isAdmin()){
         <th scope="col">Test Name</th>
         <th scope="col">Description</th>
         <th scope="col">Do Not Show Marks</th>
+        <th scope="col">KS3</th>
+        <th scope="col">KS4</th>
+        <th scope="col">KS5</th>
     </tr>
     </thead>
     <tbody>
@@ -95,6 +108,36 @@ if(!isAdmin()){
         echo '<td>'.$TestNames[0].'</td>';
         echo '<td>'.$TestNames[1].'</td>';
         if ($TestNames[2]=='1'){
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" checked="1" disabled>';
+            echo '</div></td>';
+        }
+        else{
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" disabled>';
+            echo '</div></td>';
+        }
+        if ($TestNames[3]=='1'){
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" checked="1" disabled>';
+            echo '</div></td>';
+        }
+        else{
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" disabled>';
+            echo '</div></td>';
+        }
+        if ($TestNames[4]=='1'){
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" checked="1" disabled>';
+            echo '</div></td>';
+        }
+        else{
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" disabled>';
+            echo '</div></td>';
+        }
+        if ($TestNames[5]=='1'){
             echo '<td align="center"><div class="form-check">';
             echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" checked="1" disabled>';
             echo '</div></td>';

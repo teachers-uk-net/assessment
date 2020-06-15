@@ -12,6 +12,7 @@ if(!isAdmin()){
         <tr>
             <th scope="col">Group</th>
             <th scope="col">Assigned</th>
+            <th scope="col">Marked</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,18 @@ if(!isAdmin()){
                 echo '<td align="center"><div class="form-check">';
                 echo '<input type="hidden" name="assignedTest['.$assignTest[0].']" value=0>';
                 echo '<input class="form-check-input position-static" type="checkbox" name="assignedTest['.$assignTest[0].']" value=1 id="assignedTest" checked="checked">';
+                echo '</div></td>';
+            }
+            if (is_null($assignTest[1]) || $assignTest[3]==0){
+                echo '<td align="center"><div class="form-check">';
+                echo '<input type="hidden" name="marked['.$assignTest[0].']" value=0>';
+                echo '<input class="form-check-input position-static" type="checkbox" name="marked['.$assignTest[0].']" value=1 id="marked">';
+                echo '</div></td>';
+            }
+            else{
+                echo '<td align="center"><div class="form-check">';
+                echo '<input type="hidden" name="marked['.$assignTest[0].']" value=0>';
+                echo '<input class="form-check-input position-static" type="checkbox" name="marked['.$assignTest[0].']" value=1 id="marked" checked="checked">';
                 echo '</div></td>';
             }
             echo '</tr>';

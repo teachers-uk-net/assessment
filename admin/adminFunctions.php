@@ -15,7 +15,7 @@ include('../functions.php');
 function viewTests(){
     global $adminlink, $query;
     $TestNames = array();
-    $sql = "SELECT TestName, Description, DoNotShowMarks
+    $sql = "SELECT TestName, Description, DoNotShowMarks, KS3, KS4, KS5
             FROM tblTests";
 
     $query = mysqli_query($adminlink, $sql);
@@ -72,11 +72,11 @@ function addTest(){
     if(count($errors) == 0){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO tblTests (TestName, Description, DoNotShowMarks) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO tblTests (TestName, Description, DoNotShowMarks, KS3, KS4, KS5) VALUES (?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssi", $param_TestName, $param_Description, $param_DoNotShowMarks);
+            mysqli_stmt_bind_param($stmt, "ssi", $param_TestName, $param_Description, $param_DoNotShowMarks, $param_KS3, $param_KS4, $param_KS5);
 
             // Set parameters
             $param_TestName = $TestName;
@@ -85,6 +85,21 @@ function addTest(){
                 $param_DoNotShowMarks = 1;
             } else{
                 $param_DoNotShowMarks = 0;
+            }
+            if (isset($_POST['KS3'])){
+                $param_KS3 = 1;
+            } else{
+                $param_KS3 = 0;
+            }
+            if (isset($_POST['KS4'])){
+                $param_KS4 = 1;
+            } else{
+                $param_KS4 = 0;
+            }
+            if (isset($_POST['KS5'])){
+                $param_KS5 = 1;
+            } else{
+                $param_KS5 = 0;
             }
 
             // Attempt to execute the prepared statement
@@ -562,7 +577,7 @@ function markTests(){
 //line 332 testAssign in admin.php
 function testAssign(){
     global $link, $qryTestAssign;
-    $sql = "SELECT tG.GroupID, tGT.TestName, tGT.Available
+    $sql = "SELECT tG.GroupID, tGT.TestName, tGT.Available, tGT.marked
             FROM tblGroups tG
             LEFT JOIN tblGroupTests tGT ON tG.GroupID = tGT.GroupID
             AND tGT.TestName='".$_GET['testAssign']."'";
@@ -585,6 +600,7 @@ function assignTest(){
     //$subcheck = (isset($_POST['subcheck'])) ? 1 : 0;
     $TestName = $_POST['TestName'];
     //$MarkAvailable = $_POST['EQMark'];
+    $marked = $_POST['marked'];
     $counter = 0;
 
 
@@ -594,22 +610,23 @@ function assignTest(){
         //$sql = "REPLACE INTO tblGroupTests (GroupID, TestName, Available)
         //        VALUES (?,?,?)";
 
-        $sql = "INSERT INTO tblGroupTests (GroupID, TestName, Available)
-                VALUES (?,?,?)
+        $sql = "INSERT INTO tblGroupTests (GroupID, TestName, Available, marked)
+                VALUES (?,?,?,?)
                 ON DUPLICATE KEY UPDATE Available=?";
 
 
 
         if ($stmt = mysqli_prepare($link2, $sql)) {
-            mysqli_stmt_bind_param($stmt, "ssii", $param_Group, $param_Test, $param_available, $param_available);
+            mysqli_stmt_bind_param($stmt, "ssii", $param_Group, $param_Test, $param_available, $param_available, $param_marked);
             $param_available = $value;
             $param_Group = $y;
             $param_Test = $TestName;
+            $param_marked = $marked[$y];
 
             if (mysqli_stmt_execute($stmt)) {
                 $counter = $counter + 1;
             } else {
-                echo "<br>Something went wrong line 600 adminfunctions. Please try again later. Counter is: " . $counter."<br>";
+                echo "<br>Something went wrong line 596 adminfunctions. Please try again later. Counter is: " . $counter."<br>";
                 echo mysqli_error($link2)."<br>";
                 print_r("Available: ".$value);
                 print_r(" Group: ".$assignTest[$y]);
