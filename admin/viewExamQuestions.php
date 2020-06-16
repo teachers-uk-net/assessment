@@ -33,34 +33,15 @@ if(!isAdmin()){
     include ('ExamMarking.php');
     //echo "<p>From the top: </p><br>";
     //print_r($QuestParts);
+
     ?>
     <?php //if(!empty($QuestionType)): ?>
-    <div id="trackingLink">
-        <a class="btn btn-link" onclick="showTracking()">Show / hide tracking</a>
-    </div>
-    <div id="tracking">
-        <div class="panel panel-default">
-            <table class="table">
-                <tr>
-                    <td>Uses software under the control of the teacher to create, store and edit digital content using appropriate file and folder names.</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>Understands that people interact with computers.</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>Shares their use of technology in school.</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-            </table>
-        </div>
-        Tracking details here
-    </div>
+
     <?php if(!empty($QuestNo)): ?>
 <!--    <h2>Question --><?php //echo $QuestNo; ?><!--</h2>-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <?php echo display_error(); ?>
+
         <?php
         if(!isset($_GET['users_id'])){
             $userID = $_POST['users_id'];
@@ -72,11 +53,30 @@ if(!isAdmin()){
         } else {
             $TestName = $_GET['Test'];
         }
+        if(!isset($_GET['KS3'])){
+            $keyStage3 = $_POST['KS3'];
+        } else{
+            $keyStage3 = $_GET['KS3'];
+        }
+        if(!isset($_GET['KS4'])){
+            $keyStage4 = $_POST['KS4'];
+        } else{
+            $keyStage4 = $_GET['KS4'];
+        }
+        if(!isset($_GET['KS5'])){
+            $keyStage5 = $_POST['KS5'];
+        } else{
+            $keyStage5 = $_GET['KS5'];
+        }
         ?>
+        <?php include ('Tracking.php'); ?>
         <input type="hidden" name="QuestNo" value="<?php echo $QuestNo; ?>">
         <input type="hidden" name="QuestionType" value="<?php echo $QuestionType; ?>">
         <input type="hidden" name="users_id" value="<?php echo $userID; ?>">
         <input type="hidden" name="TestName" value="<?php echo $TestName; ?>">
+        <input type="hidden" name="KS3" value="<?php echo $keyStage3; ?>">
+        <input type="hidden" name="KS4" value="<?php echo $keyStage4; ?>">
+        <input type="hidden" name="KS5" value="<?php echo $keyStage5; ?>">
         <fieldset class="form-group">
             <?php
 
@@ -120,10 +120,8 @@ if(!isAdmin()){
                         </textarea>
                             <label for="Mark<?php echo $val['QuestID']; ?>">Enter mark:</label>
                             <input type="number" name="MarkAwarded[<?php echo $val['QuestID']; ?>]" id="Mark<?php echo $val['QuestID']; ?>" value="<?php echo $val['Marks']; ?>">
+                            <p><?php if ($_GET['NoMarks']==0){ if($val['Marks']>1){printf("(out of a possible %s marks)", $val['Marks']);}else{printf("(out of a possible %s mark)", $val['Marks']);} }?></p>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <p><?php if ($_GET['NoMarks']==0){ if($val['Marks']>1){printf("(%s marks)", $val['Marks']);}else{printf("(%s mark)", $val['Marks']);} }?></p>
                     </div>
                     <script>
                         ClassicEditor
@@ -153,7 +151,7 @@ if(!isAdmin()){
             <?php endif; ?>
         </fieldset>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" name="marking_btn" value="Submit Marks">
+            <input type="submit" class="btn btn-primary" name="marking_btn" value="Submit Marks and Tracking Data">
             <!--<input type="submit" class="btn btn-primary" name="previous_btn" value="Previous Question">-->
         </div>
     </form>

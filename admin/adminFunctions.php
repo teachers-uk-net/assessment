@@ -559,12 +559,13 @@ function selectTest(){
 //Need to view and mark submissions
 function markTests(){
     global $adminlink, $qryMarkTests;
-    $sql = "SELECT DISTINCT tU.username, tG.GroupID, tU.UsersID
+    $sql = "SELECT DISTINCT tU.username, tG.GroupID, tU.UsersID, tT.KS3, tT.KS4, tT.KS5
             FROM tblStudentResponses tSR
             JOIN tblQuestions tQ on tSR.ResponseQuestID = tQ.QuestID
             JOIN tblUsers tU on tSR.users_id = tU.UsersID
             JOIN tblUserGroups tUG on tU.UsersID = tUG.UsersID
             JOIN tblGroups tG on tUG.GroupID = tG.GroupID
+            JOIN tblTests tT on tQ.TestName = tT.TestName
             WHERE tG.GroupID='".$_GET['group']."' AND tQ.TestName='".$_GET['selectTest']."'";
 
     $qryMarkTests = mysqli_query($adminlink, $sql);
@@ -671,11 +672,15 @@ if (isset($_POST['marking_btn']) && isset($_POST['EQfeedback'])){
 
 function EQmarking()
 {
-    global $link2, $NextQuest, $TestName;
+    global $adminlink, $link2, $NextQuest, $TestName;
 
     $EQfeedback = $_POST['EQfeedback'];
     $userID = $_POST['users_id'];
     $MarkAwarded = $_POST['MarkAwarded'];
+    $trackingSubmitted = $_POST['tracking'];
+    $Keystage3 = $_POST['KS3'];
+    $Keystage4 = $_POST['KS4'];
+    $Keystage5 = $_POST['KS5'];
     //print_r($EQfeedback);
     //printf("userID: ".$userID."<br>");
     //print_r($MarkAwarded);
@@ -715,6 +720,28 @@ function EQmarking()
         echo "Something went wrong line 701 adminfunctions. Please try again later.";
     }
     mysqli_close($link2);
+
+    //Code to update tracking tables goes here
+    //print_r($trackingSubmitted);
+    $trackingSets = array();
+    foreach ($trackingSubmitted as $key => $val){
+        $trackingSets[] = $key . "=" .$val;
+    }
+    if ($Keystage3 == 1){
+        $updTracking = "UPDATE KS3Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
+    } elseif ($Keystage4 == 1){
+        $updTracking = "UPDATE KS4Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
+    } elseif ($Keystage5 == 1){
+        $updTracking = "UPDATE KS5Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
+    }
+    if ($insResult = mysqli_query($adminlink,$updTracking)){
+        echo '<script>console.log("Tracking data updated");</script>';
+    } else {
+        die('SQL Error inserting Tracking data line 740: ' . mysqli_error($adminlink));
+    }
+    //print_r($trackingSets);
+
+
 }
 
 if (isset($_POST['editEQ_btn'])){
