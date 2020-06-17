@@ -65,7 +65,7 @@ $keyStage5 = 1;
 
 //print_r($KS4Track);
 echo'<div id="KS4tracking" class="col-sm-4">
-    <h3 style="text-align: center">KS3 Descriptors</h3>';
+    <h3 style="text-align: center">KS3 Success Criteria by topic</h3>';
 
 $TheUrswickBasicsFlag = true;
 $ComputationalThinkingFlag = true;
@@ -91,14 +91,14 @@ for ($i = 0;$i < count($KS3Track['Topic']);$i++){
     } elseif ($KS3Track['Topic'][$i] == "Microbit" && $MicrobitFlag){
         echo'            </table>';
         echo'        </div>';
-        echo'<button type="button" class="collapsible TrackingBtn">Microbit</button>';
+        echo'<button type="button" class="collapsible TrackingBtn">Microbit (Year 7)</button>';
         echo'        <div class="contentLower panel panel-default">';
         echo'            <table class="table">';
         $MicrobitFlag = false;
     } elseif ($KS3Track['Topic'][$i] == "Databases" && $DatabasesFlag){
         echo'            </table>';
         echo'        </div>';
-        echo'<button type="button" class="collapsible TrackingBtn">Databases</button>';
+        echo'<button type="button" class="collapsible TrackingBtn">Databases (Year 8)</button>';
         echo'        <div class="contentLower panel panel-default">';
         echo'            <table class="table">';
         $DatabasesFlag = false;
@@ -144,7 +144,7 @@ echo'            </table>';
 echo'        </div>';
 echo'</div>';
 echo'<div id="KS4tracking" class="col-sm-4">
-    <h3 style="text-align: center">KS4 Descriptors</h3>';
+    <h3 style="text-align: center">GCSE Computer Science Success Criteria</h3>';
 $AlgorithmsFlag = true;
 $ProgrammingTechniquesFlag = true;
 $ProducingRobustProgramsFlag = true;
@@ -267,7 +267,7 @@ echo'            </table>';
 echo'        </div>';
 echo'</div>';
 echo'<div id="KS4tracking" class="col-sm-4">
-    <h3 style="text-align: center">KS5 Descriptors</h3>';
+    <h3 style="text-align: center">GCE Computer Science Success Criteria</h3>';
 $CompComponentsFlag = true;
 $SoftwareFlag = true;
 $ExchangingDataFlag = true;

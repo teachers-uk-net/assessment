@@ -66,6 +66,7 @@ if ($result = mysqli_query($adminlink,$qryTrack2)){
 
 } else {
     echo'<h3>Error in Tracking.php line 37</h3>';
+    die('SQL Error inserting Tracking data line 69: ' . mysqli_error($adminlink));
 }
 
 echo'<div id="trackingLink">';
