@@ -35,6 +35,7 @@ if (!isLoggedIn()) {
             text-align: center;
         }
     </style>
+    <link rel="stylesheet" href="userPref.css">
 </head>
 <body onload="setInterval(function(){$.post('refresh_session.php');},600000);">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -219,7 +220,18 @@ if (!isLoggedIn()) {
     <?php endif; ?>
 </div>
 
+<div id="bgBtnLinks">
+    <button class="colorButtons btn-sm btn-link" onclick="changeBGColor('Cornsilk')">Cornsilk</button>
+    <button class="colorButtons btn-sm btn-link" onclick="changeBGColor('White')">White</button>
+    <button class="colorButtons btn-sm btn-link" onclick="changeBGColor('PowderBlue')">PowderBlue</button>
+</div>
 
+
+<script>
+    function changeBGColor(colorName){
+        document.body.style.background = colorName;
+    }
+</script>
 
 </body>
 
