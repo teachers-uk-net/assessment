@@ -6,19 +6,21 @@ then store responses in MariaDB using php
 Responses can be marked with direct feedback and mark for each 
 question saved
 
+Students can be tracked using success criteria for KS3 IT and Computer Science, GCSE Computer Science, GCE A Level CS and BTEC Creative Media
+
 ### TODO
 
-- Add a column (boolean) in tblGroupTests for 'marked'
+~~- Add a column (boolean) in tblGroupTests for 'marked'~~
 ~~- Add "keep alive" to pages to allow more time to respond before a php timeout~~ At UAT
 - Considering adding the ability for users to change background colours (although actual exam papers are white with black text)
 - Create a view so that when 'marked' and 'Available' are true student 
 sees a button to take them to feedback and marks
-- Add a view in admin backend to toggle 'marked'
+~~- Add a view in admin backend to toggle 'marked'~~ At UAT
 - Add dashboards to view students progress / results
 - Re-write everything using PDO
 - Add sql for tables to repo (with some "dummy" data perhaps)
 - Add an example of an assessment upload csv file)
-- Add more navigation on pages (between questions mainly)
+- Add more navigation on pages (between questions mainly) (progress for admin end)
 
 ##### Known issues
 
