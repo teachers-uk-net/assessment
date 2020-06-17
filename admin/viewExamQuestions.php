@@ -102,11 +102,7 @@ if(!isAdmin()){
                             <label for="textResponse">
                                 <?php echo $val['Question']; ?>
                             </label>
-                            <hr>
-                            <div>
-                                <h2>Mark scheme:</h2>
-                                <?php echo $val['CorrectAns']; ?>
-                            </div>
+
                             <hr>
                             <blockquote>
                                 <h2>Students response:</h2>
@@ -121,6 +117,11 @@ if(!isAdmin()){
                             <label for="Mark<?php echo $val['QuestID']; ?>">Enter mark:</label>
                             <input type="number" name="MarkAwarded[<?php echo $val['QuestID']; ?>]" id="Mark<?php echo $val['QuestID']; ?>" value="<?php echo $val['Marks']; ?>">
                             <p><?php if ($_GET['NoMarks']==0){ if($val['Marks']>1){printf("(out of a possible %s marks)", $val['Marks']);}else{printf("(out of a possible %s mark)", $val['Marks']);} }?></p>
+                            <hr>
+                            <div>
+                                <h2>Mark scheme:</h2>
+                                <?php echo $val['CorrectAns']; ?>
+                            </div>
                         </div>
                     </div>
                     <script>
