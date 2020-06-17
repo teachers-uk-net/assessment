@@ -6,7 +6,7 @@ echo '<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Marking Question</title>
+    <title>Success Criteria / Descriptors for CS</title>
     <link rel="stylesheet" href="../../bootstrap/3.3.7/dist/css/bootstrap.css">
     <link rel="stylesheet" href="tracking2.css">
     <style type="text/css">
@@ -65,7 +65,7 @@ $keyStage5 = 1;
 
 //print_r($KS4Track);
 echo'<div id="KS4tracking" class="col-sm-4">
-    <h3>KS3 Descriptors</h3>';
+    <h3 style="text-align: center">KS3 Descriptors</h3>';
 
 $TheUrswickBasicsFlag = true;
 $ComputationalThinkingFlag = true;
@@ -144,7 +144,7 @@ echo'            </table>';
 echo'        </div>';
 echo'</div>';
 echo'<div id="KS4tracking" class="col-sm-4">
-    <h3>KS4 Descriptors</h3>';
+    <h3 style="text-align: center">KS4 Descriptors</h3>';
 $AlgorithmsFlag = true;
 $ProgrammingTechniquesFlag = true;
 $ProducingRobustProgramsFlag = true;
@@ -267,7 +267,7 @@ echo'            </table>';
 echo'        </div>';
 echo'</div>';
 echo'<div id="KS4tracking" class="col-sm-4">
-    <h3>KS5 Descriptors</h3>';
+    <h3 style="text-align: center">KS5 Descriptors</h3>';
 $CompComponentsFlag = true;
 $SoftwareFlag = true;
 $ExchangingDataFlag = true;
