@@ -1,6 +1,6 @@
 # Assessment module
 
-Allows fairly accurate re-creation of exams on html pages that can 
+Allows fairly accurate re-creation of exams and exam style pages in html pages that can 
 then store responses in MariaDB using php
 
 Responses can be marked with direct feedback and mark for each 
