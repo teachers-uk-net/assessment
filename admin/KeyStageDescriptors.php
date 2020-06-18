@@ -18,7 +18,9 @@ echo '<!DOCTYPE html>
 <body onload="setInterval(function(){$.post(\'/../refresh_session.php\');},600000);">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<div class="wrapper">';
+<div class="wrapper">
+<a class="btn btn-link" href="#BTECTracking">View BTEC Assessment Criteria</a>
+<div class="row">';
 
 $keyStage3 = 1;
 $keyStage4 = 1;
@@ -64,8 +66,8 @@ $keyStage5 = 1;
     }
 
 //print_r($KS4Track);
-echo'<div id="KS4tracking" class="col-sm-4">
-    <h3 style="text-align: center">KS3 Success Criteria by topic</h3>';
+echo'<div class="KS4tracking" class="col-sm-4">
+    <h3 style="text-align: center">KS3 Success Criteria by teaching topic</h3>';
 
 $TheUrswickBasicsFlag = true;
 $ComputationalThinkingFlag = true;
@@ -143,7 +145,7 @@ for ($i = 0;$i < count($KS3Track['Topic']);$i++){
 echo'            </table>';
 echo'        </div>';
 echo'</div>';
-echo'<div id="KS4tracking" class="col-sm-4">
+echo'<div class="KS4tracking" class="col-sm-4">
     <h3 style="text-align: center">GCSE Computer Science Success Criteria</h3>';
 $AlgorithmsFlag = true;
 $ProgrammingTechniquesFlag = true;
@@ -266,7 +268,7 @@ for ($j = 0;$j < count($KS4Track['Topic'])-1;$j++){
 echo'            </table>';
 echo'        </div>';
 echo'</div>';
-echo'<div id="KS4tracking" class="col-sm-4">
+echo'<div class="KS4tracking" class="col-sm-4">
     <h3 style="text-align: center">GCE Computer Science Success Criteria</h3>';
 $CompComponentsFlag = true;
 $SoftwareFlag = true;
@@ -354,6 +356,7 @@ echo'</div>';
 mysqli_close($link2);
 mysqli_close($link);
 mysqli_close($adminlink);
+include ('CreativeMediaCriteria.php');
 echo'<script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -371,6 +374,7 @@ echo'<script>
         });
     }
 </script>
+</div>
 </div>
 </body>
 </html>';

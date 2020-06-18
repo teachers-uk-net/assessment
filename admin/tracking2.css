@@ -1,12 +1,21 @@
-#KS4tracking {
+.KS4tracking {
     display: inline-block;
     width: 30vw;
-    padding: 50px 0;
+    padding: 20px 5px;
     /*text-align: center;*/
     background-color: Powderblue;
     margin: 10px;
     height: 100%;
     /*overflow-y: scroll;*/
+    vertical-align: top;
+}
+
+#BTECTracking {
+    padding: 20px 0;
+    /*text-align: center;*/
+    background-color: Powderblue;
+    margin: 10px;
+    width: 95vw;
 }
 
 .trackingBtn {
