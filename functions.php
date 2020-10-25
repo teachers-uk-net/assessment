@@ -262,6 +262,8 @@ function welcome(){
         mysqli_stmt_close($stmt);
     }
     mysqli_close($link);
+
+
 }
 
 //Function to select the correct question from table and associated answers (if applicable), marks and type
@@ -280,6 +282,9 @@ function question(){
     } else{
         $QuestNo = 1;
     }
+
+
+
     $sql = "SELECT QuestID, QuestPart, QuestSubPart, Question, Ans1, Ans2, Ans3, Ans4, Marks, QuestionType 
             FROM tblQuestions WHERE QuestNo=? AND TestName=? ORDER BY QuestPart,QuestSubPart";
     if($stmt = mysqli_prepare($link, $sql)){
@@ -297,12 +302,13 @@ function question(){
             // Store result
             mysqli_stmt_store_result($stmt);
 
-            // Check if username exists, if yes then verify password
+            // Check we are getting a response
             if(mysqli_stmt_num_rows($stmt) == 1){
                 // Bind result variables
                 mysqli_stmt_bind_result($stmt,$QuestID, $QuestNoPart, $QuestSubPart, $Question, $Ans1, $Ans2, $Ans3, $Ans4, $Marks, $QuestionType);
 
                 if(mysqli_stmt_fetch($stmt)){
+
                     if($QuestionType == 1){
                         /* Radio button style question*/
                         //   echo "Question Type is 1: radio buttons";

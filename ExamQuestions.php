@@ -23,11 +23,12 @@ $sql2 = "SELECT tQ.QuestID, tQ.QuestPart, tQ.QuestSubPart, tQ.Question, tQ.Marks
 if($stmt2 = mysqli_prepare($adminlink, $sql2)) {
 
     // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt2, "ssi", $param_QuestNo, $param_TestName, $param_users_id);
+    mysqli_stmt_bind_param($stmt2, "isi", $param_QuestNo, $param_TestName, $param_users_id);
     // Set parameters
     $param_QuestNo = $QuestNo;
     $param_TestName = $_SESSION['TestName'];
     $param_users_id = $_SESSION['users_id'];
+
 
     mysqli_stmt_execute($stmt2);
     mysqli_stmt_bind_result($stmt2, $QuestID, $QuestNoPart, $QuestSubPart, $Question, $Marks, $QuestionType, $SResponse);
@@ -39,5 +40,6 @@ if($stmt2 = mysqli_prepare($adminlink, $sql2)) {
         //print_r($QuestParts);
     }
     mysqli_stmt_close($stmt2);
+    //printf("<br>From ExamQuestions: param_QuestNo: ".$param_QuestNo."<br>ParamTestName: ".$param_TestName."<br>QuestionType: ".$QuestionType);
 }
 mysqli_close($adminlink);

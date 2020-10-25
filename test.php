@@ -52,6 +52,7 @@ if (!isLoggedIn()) {
         //printf("POST data: ".var_export( $_POST, true));
         //printf("<br>GET data: ".var_export( $_GET, true));
         //printf("<br>SESSION data: ".var_export( $_SESSION, true));
+        //printf("<br>ParamQuestNo: ".$param_QuestNo."<br>ParamTestName: ".$param_TestName."<br>QuestionType: ".$QuestionType);
     ?>
     <?php if(!empty($QuestionType)): ?>
     <h2>Question <?php echo $QuestNo; ?></h2>

@@ -15,7 +15,7 @@ include('../functions.php');
 function viewTests(){
     global $adminlink, $query;
     $TestNames = array();
-    $sql = "SELECT TestName, Description, DoNotShowMarks, KS3, KS4, KS5
+    $sql = "SELECT TestName, Description, DoNotShowMarks, KS3, KS4, KS4_2020, KS5
             FROM tblTests";
 
     $query = mysqli_query($adminlink, $sql);
@@ -72,11 +72,11 @@ function addTest(){
     if(count($errors) == 0){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO tblTests (TestName, Description, DoNotShowMarks, KS3, KS4, KS5) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tblTests (TestName, Description, DoNotShowMarks, KS3, KS4, KS4_2020, KS5) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssi", $param_TestName, $param_Description, $param_DoNotShowMarks, $param_KS3, $param_KS4, $param_KS5);
+            mysqli_stmt_bind_param($stmt, "ssiiiii", $param_TestName, $param_Description, $param_DoNotShowMarks, $param_KS3, $param_KS4, $param_KS4_2020, $param_KS5);
 
             // Set parameters
             $param_TestName = $TestName;
@@ -96,6 +96,11 @@ function addTest(){
             } else{
                 $param_KS4 = 0;
             }
+            if (isset($_POST['KS4_2020'])){
+                $param_KS4_2020 = 1;
+            } else{
+                $param_KS4_2020 = 0;
+            }
             if (isset($_POST['KS5'])){
                 $param_KS5 = 1;
             } else{
@@ -107,6 +112,9 @@ function addTest(){
                 // Redirect to page
                 header("location: admin.php?viewTests=1");
             } else{
+                echo"";
+                printf("\nparam_KS4_2020: %s\n",$param_KS4_2020);
+                printf("\nparam_KS4: %s\n",$param_KS4);
                 echo "Something went wrong line 95 adminfunctions. Please try again later.";
             }
         }
@@ -559,7 +567,7 @@ function selectTest(){
 //Need to view and mark submissions
 function markTests(){
     global $adminlink, $qryMarkTests;
-    $sql = "SELECT DISTINCT tU.username, tG.GroupID, tU.UsersID, tT.KS3, tT.KS4, tT.KS5
+    $sql = "SELECT DISTINCT tU.username, tG.GroupID, tU.UsersID, tT.KS3, tT.KS4, tT.KS4_2020, tT.KS5
             FROM tblStudentResponses tSR
             JOIN tblQuestions tQ on tSR.ResponseQuestID = tQ.QuestID
             JOIN tblUsers tU on tSR.users_id = tU.UsersID
@@ -613,26 +621,29 @@ function assignTest(){
 
         $sql = "INSERT INTO tblGroupTests (GroupID, TestName, Available, marked)
                 VALUES (?,?,?,?)
-                ON DUPLICATE KEY UPDATE Available=?";
-
-
+                ON DUPLICATE KEY UPDATE Available=?, marked=?";
 
         if ($stmt = mysqli_prepare($link2, $sql)) {
-            mysqli_stmt_bind_param($stmt, "ssii", $param_Group, $param_Test, $param_available, $param_available, $param_marked);
-            $param_available = $value;
+            mysqli_stmt_bind_param($stmt, "ssiiii", $param_Group, $param_Test, $param_available, $param_marked, $param_available, $param_marked);
             $param_Group = $y;
             $param_Test = $TestName;
+            $param_available = $value;
             $param_marked = $marked[$y];
 
             if (mysqli_stmt_execute($stmt)) {
                 $counter = $counter + 1;
+                //print_r("\nparam_marked: ".$param_marked);
+                //print_r("Line 635AdminFunctions.php, Available: ".$value);
+                //print_r(" Group: ".$assignTest[$y]);
+                //print_r(" Test: ".$TestName);
+                //print_r(" y: ".$y);
             } else {
-                echo "<br>Something went wrong line 596 adminfunctions. Please try again later. Counter is: " . $counter."<br>";
+                echo "<br>Something went wrong line 638 adminfunctions. Please try again later. Counter is: " . $counter."<br>";
                 echo mysqli_error($link2)."<br>";
-                print_r("Available: ".$value);
-                print_r(" Group: ".$assignTest[$y]);
-                print_r(" Test: ".$TestName);
-                print_r(" y: ".$y);
+                print_r("\nAvailable: ".$value);
+                print_r("\n Group: ".$assignTest[$y]);
+                print_r("\n Test: ".$TestName);
+                print_r("\n y: ".$y);
             }
         }
         mysqli_stmt_close($stmt);
@@ -654,10 +665,10 @@ function assignTest(){
                     WHERE tQ.QuestID = tSR.ResponseQuestID
                     AND tU.UsersID = tSR.users_id)";
 
-        $qryAssignTest = mysqli_query($link, $sql2);
+        $qryPostAssignTest = mysqli_query($link, $sql2);
 
-        if (!$qryAssignTest){
-            die('SQL Error adminFunctions.php line 623: '.mysqli_error($link));
+        if (!$qryPostAssignTest){
+            die('SQL Error adminFunctions.php line 668: '.mysqli_error($link));
         }
 
     }
@@ -680,6 +691,7 @@ function EQmarking()
     $trackingSubmitted = $_POST['tracking'];
     $Keystage3 = $_POST['KS3'];
     $Keystage4 = $_POST['KS4'];
+    $Keystage4_2020 = $_POST['KS4_2020'];
     $Keystage5 = $_POST['KS5'];
     //print_r($EQfeedback);
     //printf("userID: ".$userID."<br>");
@@ -731,6 +743,8 @@ function EQmarking()
         $updTracking = "UPDATE KS3Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
     } elseif ($Keystage4 == 1){
         $updTracking = "UPDATE KS4Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
+    } elseif ($Keystage4_2020 == 1){
+        $updTracking = "UPDATE KS4_2020Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
     } elseif ($Keystage5 == 1){
         $updTracking = "UPDATE KS5Tracking SET ".join(",",$trackingSets)." WHERE userID=".$userID;
     }
@@ -827,38 +841,6 @@ function marking(){
             // Store result
             mysqli_stmt_store_result($stmt);
 
-            // Check if username exists, if yes then verify password
-            if(mysqli_stmt_num_rows($stmt) == 1){
-                // Bind result variables
-                mysqli_stmt_bind_result($stmt,$QuestID, $QuestNoPart, $QuestSubPart, $Question, $Ans1, $Ans2, $Ans3, $Ans4, $Marks, $QuestionType);
-
-                if(mysqli_stmt_fetch($stmt)){
-                    if($QuestionType == 1){
-                        /* Radio button style question*/
-                        //   echo "Question Type is 1: radio buttons";
-                    } elseif($QuestionType==2){
-                        //Single text box question
-                        //    echo "Question Type is 2: single text box";
-                    } elseif($QuestionType==3){
-                        //Multi text box question
-                        //    echo "Question Type is 3: multiple text answers";
-                    } elseif($QuestionType==4){
-                        //Checkboxes question
-                        //    echo "Question Type is 4: checkbox";
-                    } elseif($QuestionType==5){
-                        //Checkboxes question
-                        //    echo "Question Type is 5: examQuestion";
-                    } else{
-                        //Catch an error unknown questiontype
-                        echo "Unknown question type";
-                    }
-                } else{
-                    // Display an error message if questID doesn't exist
-                    echo "Question does not exist";
-                }
-            } else{
-                //echo "That is the end of the test, thank you.";
-            }
         }
         // Close statement
         mysqli_stmt_close($stmt);

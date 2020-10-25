@@ -21,6 +21,8 @@ if(!isAdmin()){
                     <label class="form-check-label" for="KS3">KS3 Assessment &nbsp;</label>
                     <input class="form-check-input position-static" type="checkbox" id="KS4" name="KS4">
                     <label class="form-check-label" for="KS4">KS4 Assessment &nbsp;</label>
+                    <input class="form-check-input position-static" type="checkbox" id="KS4_2020" name="KS4_2020">
+                    <label class="form-check-label" for="KS4_2020">2020 KS4 Assessment &nbsp;</label>
                     <input class="form-check-input position-static" type="checkbox" id="KS5" name="KS5">
                     <label class="form-check-label" for="KS5">KS5 Assessment &nbsp;</label>
                 </div>
@@ -99,6 +101,7 @@ if(!isAdmin()){
         <th scope="col">Do Not Show Marks</th>
         <th scope="col">KS3</th>
         <th scope="col">KS4</th>
+        <th scope="col">2020 KS4</th>
         <th scope="col">KS5</th>
     </tr>
     </thead>
@@ -138,6 +141,16 @@ if(!isAdmin()){
             echo '</div></td>';
         }
         if ($TestNames[5]=='1'){
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" checked="1" disabled>';
+            echo '</div></td>';
+        }
+        else{
+            echo '<td align="center"><div class="form-check">';
+            echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" disabled>';
+            echo '</div></td>';
+        }
+        if ($TestNames[6]=='1'){
             echo '<td align="center"><div class="form-check">';
             echo '<input class="form-check-input position-static" type="checkbox" value="'.$TestNames[2].'" id="'.$TestNames[2].'" checked="1" disabled>';
             echo '</div></td>';

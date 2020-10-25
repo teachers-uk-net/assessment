@@ -1,6 +1,6 @@
 <?php
 include ('../config.php');
-global $link2, $link, $adminlink;
+global $link2, $link, $adminlink, $link2020;
 
 echo '<!DOCTYPE html>
 <html lang="en">
@@ -19,11 +19,12 @@ echo '<!DOCTYPE html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <div class="wrapper">
-<a class="btn btn-link" href="#BTECTracking">View BTEC Assessment Criteria</a>
+<a class="btn btn-link" href="#BTECTracking">View BTEC and GCE A Level Assessment Criteria</a>
 <div class="row">';
 
 $keyStage3 = 1;
 $keyStage4 = 1;
+$keyStage4_2020 = 1;
 $keyStage5 = 1;
 
 
@@ -49,6 +50,22 @@ $keyStage5 = 1;
             $KS4Track['Descriptor'][] = $Descriptor;
         }
         mysqli_stmt_close($stmt2);
+    }
+
+    $qryTrack2020 = "SELECT Topic, Category, Descriptor FROM KS4_2020Descriptors";
+    if ($stmt2020 = mysqli_prepare($link2020,$qryTrack2020)){
+        mysqli_stmt_execute($stmt2020);
+        mysqli_stmt_bind_result($stmt2020,$Topic, $Category, $Descriptor);
+        while (mysqli_stmt_fetch($stmt2020)){
+            $KS4_2020Track['Topic'][] = $Topic;
+            $KS4_2020Track['Category'][] = $Category;
+            $KS4_2020Track['Descriptor'][] = $Descriptor;
+            //print_r($KS4_2020Track);
+            //printf("\nTopic is: %s\n", $Topic);
+            //printf("\nCategory is: %s\n", $Category);
+            //printf("\nDescriptor is: %s\n", $Descriptor);
+        }
+        mysqli_stmt_close($stmt2020);
     }
 
     $qryTrack3 = "SELECT Topic, Descriptor FROM KS5Descriptors";
@@ -139,6 +156,109 @@ for ($i = 0;$i < count($KS3Track['Topic']);$i++){
     echo'                    </td>';
     echo'                    <td>';
     printf("%s",$KS3Track['Descriptor'][$i]);
+    echo'                    </td>';
+    echo'                </tr>';
+}
+echo'            </table>';
+echo'        </div>';
+echo'</div>';
+
+echo'<div class="KS4tracking" class="col-sm-4">
+    <h3 style="text-align: center">GCSE Computer Science 2020</h3>';
+$SystemsArchitecture = true;
+$Memory = true;
+$Networks = true;
+$NetworkSecurity = true;
+$SystemsSoftware = true;
+$EthicalLegal = true;
+$Algorithms = true;
+$ProgrammingFundamentals = true;
+$RobustPrograms = true;
+$Boolean = true;
+$IDEs = true;
+for ($k = 0;$k < count($KS4_2020Track['Topic'])-1;$k++){
+    if ($KS4_2020Track['Topic'][$k] == "Systems Architecture" && $SystemsArchitecture){
+        echo'<button type="button" class="collapsible TrackingBtn">Systems Architecture</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $SystemsArchitecture = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Memory and storage" && $Memory){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Memory and Storage</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $Memory = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Computer networks, connections and protocols" && $Networks){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Computer networks, connections and protocols</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $Networks = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Network security" && $NetworkSecurity){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Network security</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $NetworkSecurity = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Systems software" && $SystemsSoftware){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Systems software</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $SystemsSoftware = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Ethical, legal, cultural and environmental impacts of digital technology" && $EthicalLegal){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Ethical, legal, cultural and environmental impacts of digital technology</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $EthicalLegal = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Algorithms" && $Algorithms){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Algorithms</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $Algorithms = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Programming fundamentals" && $ProgrammingFundamentals){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Programming fundamentals</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $ProgrammingFundamentals = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Producing robust programs" && $RobustPrograms){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Producing robust programs</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $RobustPrograms = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Boolean logic" && $Boolean){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Boolean logic</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $Boolean = false;
+    } elseif ($KS4_2020Track['Topic'][$k] == "Programming languages and Integrated Development Environments" && $IDEs){
+        echo'            </table>';
+        echo'        </div>';
+        echo'<button type="button" class="collapsible TrackingBtn">Programming languages and Integrated Development Environments</button>';
+        echo'        <div class="contentLower panel panel-default">';
+        echo'            <table class="table">';
+        $IDEs = false;
+    }
+    echo'                <tr>';
+    echo'                    <td>';
+    printf("%s",$KS4_2020Track['Category'][$k]);
+    echo'                    </td>';
+    echo'                    <td>';
+    printf("%s",$KS4_2020Track['Descriptor'][$k]);
     echo'                    </td>';
     echo'                </tr>';
 }
@@ -356,6 +476,7 @@ echo'</div>';
 mysqli_close($link2);
 mysqli_close($link);
 mysqli_close($adminlink);
+mysqli_close($link2020);
 include ('CreativeMediaCriteria.php');
 echo'<script>
     var coll = document.getElementsByClassName("collapsible");

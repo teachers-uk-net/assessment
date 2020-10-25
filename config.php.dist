@@ -12,3 +12,5 @@ $link2 = mysqli_connect('host', 'user', 'password', 'database');
 
 $adminlink = mysqli_connect('host', 'user', 'password', 'database');
 
+$link2020 = mysqli_connect('host', 'user', 'password', 'database');
+

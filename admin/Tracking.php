@@ -27,7 +27,20 @@ if ($keyStage3 == 1){
         }
         mysqli_stmt_close($stmt);
     }
-} elseif ($keyStage5 == 1){
+} elseif ($keyStage4_2020 == 1){
+    $qryTrack = "SELECT Topic, Category, Descriptor FROM KS4_2020Descriptors";
+    $qryTrack2 = "SELECT * FROM KS4_2020Tracking WHERE userID='".$userID."'";
+    if ($stmt = mysqli_prepare($link2,$qryTrack)){
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt,$Topic, $Category, $Descriptor);
+        while (mysqli_stmt_fetch($stmt)){
+            $KS4_2020Track['Topic'][] = $Topic;
+            $KS4_2020Track['Category'][] = $Category;
+            $KS4_2020Track['Descriptor'][] = $Descriptor;
+        }
+        mysqli_stmt_close($stmt);
+    }
+}elseif ($keyStage5 == 1){
     $qryTrack = "SELECT Topic, Descriptor FROM KS5Descriptors";
     $qryTrack2 = "SELECT * FROM KS5Tracking WHERE userID='".$userID."'";
     if ($stmt = mysqli_prepare($link2,$qryTrack)){
@@ -51,6 +64,8 @@ if ($result = mysqli_query($adminlink,$qryTrack2)){
             $insUser = "INSERT INTO KS3Tracking (userID) VALUES (".$userID.")";
         } elseif ($keyStage4 == 1){
             $insUser = "INSERT INTO KS4Tracking (userID) VALUES (".$userID.")";
+        } elseif ($keyStage4_2020 == 1){
+            $insUser = "INSERT INTO KS4_2020Tracking (userID) VALUES (".$userID.")";
         } elseif ($keyStage5 == 1){
             $insUser = "INSERT INTO KS5Tracking (userID) VALUES (".$userID.")";
         }
@@ -313,6 +328,121 @@ elseif ($keyStage4 == 1):
 
     echo'            </table>';
     echo'        </div>';
+elseif ($keyStage4_2020 == 1):
+        $SystemsArchitecture = true;
+        $Memory = true;
+        $Networks = true;
+        $NetworkSecurity = true;
+        $SystemsSoftware = true;
+        $EthicalLegal = true;
+        $Algorithms = true;
+        $ProgrammingFundamentals = true;
+        $RobustPrograms = true;
+        $Boolean = true;
+        $IDEs = true;
+        if (count($studentData) == 0){
+            echo '<h2>Please go back and select the student again, there was no existing tracking data, a new record has been generated</h2>';
+        }
+        for ($i = 0;$i < count($studentData);$i++){
+            if ($KS4_2020Track['Topic'][$i] == "Systems Architecture" && $SystemsArchitecture){
+                echo'<button type="button" class="collapsible TrackingBtn">Systems Architecture</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $SystemsArchitecture = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Memory and storage" && $Memory){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Memory and Storage</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $Memory = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Computer networks, connections and protocols" && $Networks){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Computer networks, connections and protocols</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $Networks = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Network security" && $NetworkSecurity){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Network security</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $NetworkSecurity = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Systems software" && $SystemsSoftware){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Systems software</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $SystemsSoftware = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Ethical, legal, cultural and environmental impacts of digital technology" && $EthicalLegal){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Ethical, legal, cultural and environmental impacts of digital technology</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $EthicalLegal = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Algorithms" && $Algorithms){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Algorithms</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $Algorithms = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Programming fundamentals" && $ProgrammingFundamentals){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Programming fundamentals</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $ProgrammingFundamentals = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Producing robust programs" && $RobustPrograms){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Producing robust programs</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $RobustPrograms = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Boolean logic" && $Boolean){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Boolean logic</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $Boolean = false;
+            } elseif ($KS4_2020Track['Topic'][$i] == "Programming languages and Integrated Development Environments" && $IDEs){
+                echo'            </table>';
+                echo'        </div>';
+                echo'<button type="button" class="collapsible TrackingBtn">Programming languages and Integrated Development Environments</button>';
+                echo'        <div class="contentLower panel panel-default">';
+                echo'            <table class="table">';
+                $IDEs = false;
+            }
+            echo'                <tr>';
+            echo'                    <td>';
+            printf("%s",$KS4_2020Track['Category'][$i]);
+            echo'                    </td>';
+            echo'                    <td>';
+            printf("%s",$KS4_2020Track['Descriptor'][$i]);
+            echo'                    </td>';
+            echo'                    <td align="center"><div class="form-check">';
+            $t = $i + 1;
+            if ($studentData[$i+1] == 0){
+                echo '<input type="hidden" name="tracking[KS4_2020_'.$t.']" value=0>';
+                echo '<input class="form-check-input position-static" type="checkbox" name="tracking[KS4_2020_'.$t.']" value=1 id="tracking[KS4_2020_'.$t.']">';
+            }
+            else{
+                echo '<input type="hidden" name="tracking[KS4_2020_'.$t.']" value=0>';
+                echo '<input class="form-check-input position-static" type="checkbox" name="tracking[KS4_2020_'.$t.']" value=1 id="tracking[KS4_2020_'.$t.']" checked="checked">';
+            }
+            //printf("%s",$studentData[$i+1]);
+            echo'                    </div></td>';
+            echo'                </tr>';
+        }
+        echo'            </table>';
+        echo'        </div>';
 elseif ($keyStage5 == 1):
     $CompComponentsFlag = true;
     $SoftwareFlag = true;
