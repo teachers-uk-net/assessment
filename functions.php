@@ -240,7 +240,7 @@ function isAdmin()
 function welcome(){
     global $link, $Tests;
     $Tests = array();
-    $sql = "SELECT tGT.TestName AS TestName, tT.DoNotShowMarks AS NoMarks
+    $sql = "SELECT tGT.TestName AS TestName, tGT.marked AS marked, tT.DoNotShowMarks AS NoMarks, tT.KS3 AS KS3, tT.KS4 AS KS4, tT.KS4_2020 AS KS4_2020, tT.KS5 AS KS5
             FROM tblUsers tU
             JOIN tblUserGroups tUG on tU.UsersID = tUG.UsersID
             JOIN tblGroups tG on tUG.GroupID = tG.GroupID
@@ -252,10 +252,15 @@ function welcome(){
         mysqli_stmt_bind_param($stmt, "s",$param_UsersID);
         $param_UsersID = $_SESSION['users_id'];
         if(mysqli_stmt_execute($stmt)){
-            mysqli_stmt_bind_result($stmt,$TestName, $NoMarks);
+            mysqli_stmt_bind_result($stmt,$TestName, $marked, $NoMarks, $KS3, $KS4, $KS4_2020, $KS5);
             while (mysqli_stmt_fetch($stmt)){
                 //array_push($Tests, $TestName);
-                $Tests[$TestName] = $NoMarks;
+                $Tests[$TestName]['NoMarks'] = $NoMarks;
+                $Tests[$TestName]['marked'] = $marked;
+                $Tests[$TestName]['KS3'] = $KS3;
+                $Tests[$TestName]['KS4'] = $KS4;
+                $Tests[$TestName]['KS4_2020'] = $KS4_2020;
+                $Tests[$TestName]['KS5'] = $KS5;
             }
 
         }
@@ -282,8 +287,6 @@ function question(){
     } else{
         $QuestNo = 1;
     }
-
-
 
     $sql = "SELECT QuestID, QuestPart, QuestSubPart, Question, Ans1, Ans2, Ans3, Ans4, Marks, QuestionType 
             FROM tblQuestions WHERE QuestNo=? AND TestName=? ORDER BY QuestPart,QuestSubPart";
@@ -341,6 +344,17 @@ function question(){
     }
     // Close connection
     mysqli_close($link);
+}
+
+if (isset($_POST['viewMarks_btn'])){
+    viewMarks();
+}
+
+function viewMarks()
+{
+    //global $link2, $NextQuest;
+
+    //$NextQuest = intval($_POST['QuestNo']) + 1;
 }
 
 if (isset($_POST['response_btn']) && isset($_POST['EQresponse'])){

@@ -63,6 +63,11 @@ if(!isAdmin()){
         } else{
             $keyStage4 = $_GET['KS4'];
         }
+        if(!isset($_GET['KS4_2020'])){
+            $keyStage4 = $_POST['KS4_2020'];
+        } else{
+            $keyStage4 = $_GET['KS4_2020'];
+        }
         if(!isset($_GET['KS5'])){
             $keyStage5 = $_POST['KS5'];
         } else{

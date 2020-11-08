@@ -39,7 +39,7 @@ if(!isAdmin()){
         <?php while ($markTest = mysqli_fetch_array($qryMarkTests)){
             echo '<tr>';
             echo '<td>'.$markTest[1].'</td>';
-            echo '<td><a href="viewExamQuestions.php?Test='.$_GET['selectTest'].'&amp;NoMarks=0&amp;users_id='.$markTest[2].'&amp;KS3='.$markTest[3].'&amp;KS4='.$markTest[4].'&amp;KS5='.$markTest[5].'">'.$markTest[0].'</a></td>';
+            echo '<td><a href="viewExamQuestions.php?Test='.$_GET['selectTest'].'&amp;NoMarks=0&amp;users_id='.$markTest[2].'&amp;KS3='.$markTest[3].'&amp;KS4='.$markTest[4].'&amp;KS4_2020='.$markTest[5].'&amp;KS5='.$markTest[6].'">'.$markTest[0].'</a></td>';
 /*            echo '<td>'.$markTest[1].'</td>';
             echo '<td>'.$markTest[2].'</td>';
             echo '<td>'.$markTest[4].'</td>';

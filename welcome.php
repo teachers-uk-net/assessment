@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: sjm
@@ -33,8 +34,18 @@ if (!isLoggedIn()) {
 <?php if ($_SESSION['user_type']==1): ?>
     <p><a href="admin/admin.php" class="btn btn-primary">Admin page</a></p>
 <?php endif; ?>
-<?php foreach ($Tests as $TestName => $NoMarks): ?>
-<?php printf("<p><a href='test.php?Test=%s&NoMarks=%s' class='btn btn-primary'>Start %s</a></p>", $TestName, $NoMarks, $TestName); ?>
+<?php foreach ($Tests as $TestName => $vals): ?>
+<?php
+
+    if($vals['marked'] == 1){
+        //printf("<p><a href='viewMarks.php?Test=%s&NoMarks=%s&users_id=%s&KS3=%s&KS4=%s&KS4_2020=%s&KS5=%s&QuestNo=1' class='btn btn-info'>View marks for %s</a></p>", $TestName, $vals['NoMarks'], $_SESSION['users_id'], $vals['KS3'], $vals['KS4'], $vals['KS4_2020'], $vals['KS5'], $TestName);
+        printf("<p><a href='viewFeedback.php?TestName=%s&QuestNo=1' class='btn btn-info'>View feedback for %s</a></p>", $TestName, $TestName);
+
+        //print_r("This has been marked");
+    } else {
+        printf("<p><a href='takeTest.php?TestName=%s&QuestNo=1&NoMarks=%s' class='btn btn-primary'>Start %s</a></p>", $TestName, $vals['NoMarks'], $TestName);
+    }
+?>
 <?php endforeach; ?>
 <p><a href="welcome.php?logout='1'" class="btn btn-danger">Sign Out</a></p>
 </body>

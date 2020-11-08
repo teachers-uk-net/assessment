@@ -1,0 +1,21 @@
+body{ font: 14px sans-serif; }
+
+.wrapper{ padding: 20px; }
+
+.card-body table th {
+    border-collapse: collapse;
+    padding: .4em;
+    min-height: 3.5em;
+}
+
+table, td {
+    border: 1px solid dimgrey;
+    min-width: 4em;
+    text-align: center;
+}
+
+#bgBtnLinks {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
